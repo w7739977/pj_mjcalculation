@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/confirm/confirm",
     "pages/settle/settle",
-    "pages/history/history"
+    "pages/history/history",
+    "pages/test/test"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,102 @@
+/* miniprogram/pages/test/test.wxss */
+.test-container {
+  padding: 40rpx;
+}
+
+.test-header {
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #1AAD19;
+}
+
+.subtitle {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 10rpx;
+}
+
+.test-status {
+  background: white;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.status-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15rpx 0;
+}
+
+.label {
+  color: #666;
+}
+
+.value {
+  font-weight: bold;
+}
+
+.mock-settings {
+  background: white;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin: 20rpx 0 10rpx;
+}
+
+.mock-input, .mock-textarea {
+  width: 100%;
+  padding: 20rpx;
+  border: 2rpx solid #1AAD19;
+  border-radius: 10rpx;
+  margin: 10rpx 0;
+}
+
+.mock-textarea {
+  height: 200rpx;
+}
+
+.test-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.test-btn {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: linear-gradient(135deg, #1AAD19, #09BB07);
+  color: white;
+  border-radius: 40rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.test-results {
+  margin-top: 30rpx;
+  background: #f8f8f8;
+  padding: 30rpx;
+  border-radius: 20rpx;
+}
+
+.result-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 15rpx;
+}
+
+.result-content {
+  font-size: 24rpx;
+  line-height: 1.6;
+}
