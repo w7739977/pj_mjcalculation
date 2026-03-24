@@ -1,0 +1,62 @@
+<!--pages/history/history.wxml-->
+<view class="container">
+  <!-- 标签页 -->
+  <view class="tabs">
+    <view class="tab {{activeTab === 'sessions' ? 'active' : ''}}" 
+          bindtap="switchTab" data-tab="sessions">
+      历史对局
+    </view>
+    <view class="tab {{activeTab === 'debts' ? 'active' : ''}}" 
+          bindtap="switchTab" data-tab="debts">
+      欠账记录
+    </view>
+  </view>
+
+  <!-- 历史对局 -->
+  <scroll-view wx:if="{{activeTab === 'sessions'}}" scroll-y class="scroll-area">
+    <view class="session-list">
+      <view class="session-item" wx:for="{{sessions}}" wx:key="_id" 
+            bindtap="viewSession" data-id="{{item._id}}">
+        <view class="session-header">
+          <text class="date">{{item.date}}</text>
+          <text class="rounds">{{item.rounds.length}}局</text>
+        </view>
+        <view class="session-scores">
+          <view class="score-item" wx:for="{{item.summary}}" wx:key="name">
+            <text class="name">{{item.name}}</text>
+            <text class="score {{item.score > 0 ? 'positive' : 'negative'}}">
+              {{item.score > 0 ? '+' : ''}}{{item.score}}
+            </text>
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    <view wx:if="{{sessions.length === 0}}" class="empty">
+      <text>暂无对局记录</text>
+    </view>
+  </scroll-view>
+
+  <!-- 欠账记录 -->
+  <scroll-view wx:if="{{activeTab === 'debts'}}" scroll-y class="scroll-area">
+    <view class="debt-list">
+      <view class="debt-group" wx:for="{{debtGroups}}" wx:key="key">
+        <view class="group-header">
+          <text class="from-name">{{item.from}}</text>
+          <text>欠</text>
+          <text class="to-name">{{item.to}}</text>
+          <text class="total">共 ¥{{item.total}}</text>
+        </view>
+        <view class="group-actions">
+          <button class="btn-mark-settled" bindtap="markSettled" data-key="{{item.key}}">
+            标记已结清
+          </button>
+        </view>
+      </view>
+    </view>
+    
+    <view wx:if="{{debtGroups.length === 0}}" class="empty">
+      <text>暂无欠账记录</text>
+    </view>
+  </scroll-view>
+</view>

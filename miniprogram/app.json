@@ -11,7 +11,12 @@
     "navigationBarTitleText": "川麻记账",
     "navigationBarTextStyle": "white"
   },
+  "cloud": true,
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-  "cloud": true
+  "permission": {
+    "scope.record": {
+      "desc": "用于语音记账，请授权录音功能"
+    }
+  }
 }

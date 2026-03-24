@@ -1,0 +1,28 @@
+<!--pages/confirm/confirm.wxml-->
+<view class="modal-mask">
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">AI理解为：</text>
+    </view>
+    
+    <view class="modal-body">
+      <view class="result-summary">
+        <text>{{result.rawSummary}}</text>
+      </view>
+      
+      <view class="score-changes">
+        <view class="score-item" wx:for="{{players}}" wx:key="name">
+          <text class="player-name">{{item.name}}</text>
+          <text class="score-change {{item.change > 0 ? 'positive' : 'negative'}}">
+            {{item.change > 0 ? '+' : ''}}{{item.change}}番
+          </text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="modal-footer">
+      <button class="btn-confirm" bindtap="confirmRecord">✅ 确认记录</button>
+      <button class="btn-cancel" bindtap="cancelRecord">❌ 重说</button>
+    </view>
+  </view>
+</view>

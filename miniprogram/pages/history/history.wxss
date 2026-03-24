@@ -1,0 +1,131 @@
+/* pages/history/history.wxss */
+.container {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.tabs {
+  display: flex;
+  background: white;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 30rpx;
+  font-size: 32rpx;
+  color: #666;
+  transition: all 0.3s;
+}
+
+.tab.active {
+  color: #1AAD19;
+  border-bottom: 4rpx solid #1AAD19;
+  font-weight: bold;
+}
+
+.scroll-area {
+  height: calc(100vh - 100rpx);
+}
+
+.session-list, .debt-list {
+  padding: 20rpx;
+}
+
+.session-item {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin: 15rpx 0;
+  box-shadow: 0 4rpx 15rpx rgba(0, 0, 0, 0.05);
+}
+
+.session-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.date {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.rounds {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.session-scores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15rpx;
+}
+
+.score-item {
+  flex: 1;
+  min-width: 140rpx;
+  background: #f8f8f8;
+  padding: 15rpx;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.name {
+  font-size: 28rpx;
+}
+
+.score.positive {
+  color: #1AAD19;
+  font-weight: bold;
+}
+
+.score.negative{
+  color: #E64340;
+  font-weight: bold;
+}
+
+.debt-group{
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin: 15rpx 0;
+  box-shadow: 0 4rpx 15rpx rgba(0, 0, 0, 0.05);
+}
+
+.group-header{
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.from-name, .to-name{
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.total{
+  margin-left: auto;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #E64340;
+}
+
+.group-actions{
+  text-align: right;
+}
+
+.btn-mark-settled{
+  background: #1AAD19;
+  color: white;
+  font-size: 28rpx;
+}
+
+.empty{
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999;
+}

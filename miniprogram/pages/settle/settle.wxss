@@ -1,0 +1,152 @@
+/* pages/settle/settle.wxss */
+.container {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding-bottom: 40rpx;
+}
+
+.header {
+  padding: 40rpx;
+  text-align: center;
+  background: linear-gradient(180deg, #1AAD19 0%, #09BB07 100%);
+  color: white;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: bold;
+}
+
+.sub-title {
+  font-size: 24rpx;
+  opacity: 0.9;
+  margin-top: 10rpx;
+}
+
+.players {
+  margin: 20rpx;
+}
+
+.player {
+  background: white;
+  padding: 30rpx;
+  margin: 15rpx 20rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4rpx 15rpx rgba(0, 0, 0, 0.05);
+}
+
+.player.winner {
+  border-left: 8rpx solid #1AAD19;
+}
+
+.player.loser {
+  border-left: 8rpx solid #E64340;
+}
+
+.rank {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 25rpx;
+  background: linear-gradient(135deg, #1AAD19, #09BB07);
+  color: white;
+  text-align: center;
+  line-height: 50rpx;
+  font-weight: bold;
+  font-size: 28rpx;
+  margin-right: 20rpx;
+}
+
+.name {
+  flex: 1;
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.scores {
+  text-align: right;
+}
+
+.score, .money {
+  display: block;
+}
+
+.score {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.money {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.player.winner .money {
+  color: #1AAD19;
+}
+
+.player.loser .money{
+  color: #E64340;
+}
+
+.trophy {
+  font-size: 48rpx;
+  margin-left: 10rpx;
+}
+
+.debts-section {
+  margin: 30rpx 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  padding-left: 10rpx;
+}
+
+.debts {
+  background: white;
+  border-radius: 20rpx;
+  padding: 20rpx;
+}
+
+.debt-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.debt-from, .debt-to {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.arrow {
+  width: 40rpx;
+  text-align: center;
+  color: #999;
+}
+
+.debt-amount{
+  width: 100rpx;
+  text-align: right;
+  font-weight: bold;
+  font-size: 28rpx;
+  color: #E64340;
+}
+
+.btn-settle {
+  margin-left: 10rpx;
+  background: #1AAD19;
+  color: white;
+}
+
+.actions {
+  margin: 40rpx 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}

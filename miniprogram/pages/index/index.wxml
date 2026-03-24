@@ -1,18 +1,22 @@
+<!--miniprogram/pages/index/index.wxml-->
 <view class="container">
   <!-- 头部 -->
   <view class="header">
     <text class="title">川麻记账</text>
-    <view class="history-btn" bindtap="goHistory">历史对局</view>
+    <view class="history-btn" bindtap="goHistory">
+      历史对局
+    </view>
   </view>
 
   <!-- 玩家列表 -->
   <view class="players">
-    <view class="player {{item.score > 0 ? 'winner' : 'loser'}}" wx:for="{{players}}" wx:key="name">
+    <view class="player {{item.score > 0 ? 'winner' : item.score < 0 ? 'loser' : ''}}" 
+          wx:for="{{players}}" wx:key="name">
       <view class="player-info">
-        <image class="avatar" src="{{item.avatar || '/images/default-avatar.png'}}" />
+        <image class="avatar" src="{{item.avatar || '/images/default-avatar.png'}}"></image>
         <text class="name">{{item.name}}</text>
       </view>
-      <text class="score {{item.score > 0 ? 'positive' : 'negative'}}">
+      <text class="score {{item.score > 0 ? 'positive' : item.score < 0 ? 'negative' : ''}}">
         {{item.score > 0 ? '+' : ''}}{{item.score}}番
       </text>
     </view>
@@ -33,5 +37,7 @@
   </view>
 
   <!-- 结算按钮 -->
-  <view class="settle-btn" bindtap="goSettle">结束本局，去结算</view>
+  <view class="settle-section">
+    <button class="settle-btn" bindtap="goSettle">结束本局，去结算</button>
+  </view>
 </view>
