@@ -1,0 +1,31 @@
+<view class="container">
+  <view class="card">
+    <view class="room-id-display">
+      <text class="room-id-text">{{roomId}}</text>
+      <text class="room-id-label">加入川麻记账房间</text>
+    </view>
+
+    <view wx:if="{{error}}" class="error-box">
+      <text class="error-text">{{error}}</text>
+    </view>
+
+    <view wx:if="{{!joined}}">
+      <view class="form-group">
+        <text class="form-label">你的昵称</text>
+        <input class="form-input" placeholder="输入昵称" maxlength="10"
+               value="{{nickname}}" bindinput="onNicknameInput"
+               bindconfirm="joinRoom" />
+      </view>
+      <button class="btn btn-primary" bindtap="joinRoom"
+              disabled="{{!nickname || joining}}">
+        {{joining ? '加入中...' : '加入房间'}}
+      </button>
+    </view>
+
+    <view wx:else class="joined-box">
+      <text class="joined-icon">✓</text>
+      <text class="joined-text">已加入!</text>
+      <text class="joined-sub">正在跳转到房间...</text>
+    </view>
+  </view>
+</view>

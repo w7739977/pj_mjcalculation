@@ -1,131 +1,145 @@
-/* pages/history/history.wxss */
 .container {
   min-height: 100vh;
-  background: #f5f5f5;
+  background: linear-gradient(180deg, #1AAD19 0%, #f5f5f5 30%);
+  padding-bottom: 60rpx;
+}
+
+.nav-btn {
+  padding: 10rpx 24rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 24rpx;
+  font-size: 26rpx;
+  color: white;
 }
 
 .tabs {
   display: flex;
-  background: white;
-  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  margin: 16rpx 30rpx;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 16rpx;
+  overflow: hidden;
 }
 
 .tab {
   flex: 1;
   text-align: center;
-  padding: 30rpx;
-  font-size: 32rpx;
-  color: #666;
+  padding: 20rpx;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.7);
   transition: all 0.3s;
 }
 
-.tab.active {
+.tab-active {
+  background: white;
   color: #1AAD19;
-  border-bottom: 4rpx solid #1AAD19;
-  font-weight: bold;
+  font-weight: 500;
+  border-radius: 16rpx;
 }
 
-.scroll-area {
-  height: calc(100vh - 100rpx);
+.content {
+  padding: 0 30rpx;
 }
 
-.session-list, .debt-list {
-  padding: 20rpx;
-}
-
-.session-item {
+.card {
   background: white;
   border-radius: 20rpx;
   padding: 30rpx;
-  margin: 15rpx 0;
-  box-shadow: 0 4rpx 15rpx rgba(0, 0, 0, 0.05);
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
 }
 
 .session-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20rpx;
+  margin-bottom: 16rpx;
 }
 
-.date {
-  font-size: 28rpx;
-  color: #666;
+.session-date {
+  font-size: 26rpx;
+  color: #6b7280;
 }
 
-.rounds {
+.session-rounds {
   font-size: 24rpx;
-  color: #999;
+  color: #9CA3AF;
 }
 
-.session-scores {
+.score-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 15rpx;
+  gap: 16rpx;
 }
 
-.score-item {
-  flex: 1;
-  min-width: 140rpx;
-  background: #f8f8f8;
-  padding: 15rpx;
-  border-radius: 10rpx;
-  display: flex;
-  justify-content: space-between;
-}
-
-.name {
-  font-size: 28rpx;
-}
-
-.score.positive {
-  color: #1AAD19;
-  font-weight: bold;
-}
-
-.score.negative{
-  color: #E64340;
-  font-weight: bold;
-}
-
-.debt-group{
-  background: white;
-  border-radius: 20rpx;
-  padding: 30rpx;
-  margin: 15rpx 0;
-  box-shadow: 0 4rpx 15rpx rgba(0, 0, 0, 0.05);
-}
-
-.group-header{
+.score-tag {
   display: flex;
   align-items: center;
-  gap: 10rpx;
-  margin-bottom: 20rpx;
+  gap: 8rpx;
 }
 
-.from-name, .to-name{
-  font-size: 32rpx;
+.tag-name {
+  font-size: 26rpx;
   font-weight: 500;
 }
 
-.total{
-  margin-left: auto;
-  font-size: 36rpx;
+.tag-score {
+  font-size: 26rpx;
+  font-weight: bold;
+}
+
+.score-positive { color: #1AAD19; }
+.score-negative { color: #E64340; }
+.score-zero { color: #9CA3AF; }
+
+.debt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.debt-names {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.debt-name {
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.debt-label {
+  font-size: 28rpx;
+  color: #9CA3AF;
+}
+
+.debt-total {
+  font-size: 28rpx;
   font-weight: bold;
   color: #E64340;
+  margin-left: 16rpx;
 }
 
-.group-actions{
-  text-align: right;
+.settle-btn {
+  padding: 8rpx 20rpx;
+  border: 2rpx solid #1AAD19;
+  border-radius: 24rpx;
 }
 
-.btn-mark-settled{
-  background: #1AAD19;
-  color: white;
-  font-size: 28rpx;
+.settle-btn:active {
+  background: #f0faf0;
 }
 
-.empty{
+.settle-btn-text {
+  font-size: 24rpx;
+  color: #1AAD19;
+}
+
+.empty {
   text-align: center;
-  padding: 100rpx 0;
-  color: #999;
+  padding: 120rpx 0;
+}
+
+.empty-text {
+  color: #9CA3AF;
+  font-size: 28rpx;
 }

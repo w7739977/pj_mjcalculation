@@ -4,27 +4,14 @@ page {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
 }
 
-/* 全局样式 */
+/* 全局容器 */
 .container {
   min-height: 100vh;
   background: linear-gradient(180deg, #1AAD19 0%, #f5f5f5 30%);
+  padding-bottom: 40rpx;
 }
 
-/* 头部 */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30rpx 40rpx;
-  color: white;
-}
-
-.title {
-  font-size: 48rpx;
-  font-weight: bold;
-}
-
-/* 按钮样式*/
+/* 按钮 */
 .btn {
   width: 100%;
   height: 88rpx;
@@ -32,6 +19,7 @@ page {
   text-align: center;
   border-radius: 44rpx;
   font-size: 32rpx;
+  font-weight: 500;
 }
 
 .btn-primary {
@@ -39,26 +27,56 @@ page {
   color: white;
 }
 
+.btn-primary:active {
+  background: linear-gradient(135deg, #179B15, #08A806);
+}
+
 .btn-secondary {
   background: white;
   color: #1AAD19;
-  border: 2rpx solid #1AAD19;
+  border: 4rpx solid #1AAD19;
 }
 
-/* 卡片样式 */
+.btn-secondary:active {
+  background: #f0faf0;
+}
+
+.btn-danger {
+  background: white;
+  color: #E64340;
+  border: 4rpx solid #E64340;
+}
+
+.btn-disabled {
+  opacity: 0.4;
+}
+
+/* 卡片 */
 .card {
   background: white;
   border-radius: 20rpx;
   padding: 30rpx;
-  margin: 20rpx;
+  margin: 20rpx 30rpx;
   box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
 }
 
-/* 分数显示 */
-.score-positive {
-  color: #1AAD19;
-}
+/* 分数颜色 */
+.score-positive { color: #1AAD19; }
+.score-negative { color: #E64340; }
+.score-zero { color: #9CA3AF; }
 
-.score-negative {
-  color: #E64340;
-}
+/* 文本工具 */
+.text-center { text-align: center; }
+.text-sm { font-size: 24rpx; }
+.text-xs { font-size: 20rpx; }
+.text-gray { color: #9CA3AF; }
+.font-bold { font-weight: bold; }
+
+/* Flex 工具 */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.flex-1 { flex: 1; }
+.gap-sm { gap: 16rpx; }

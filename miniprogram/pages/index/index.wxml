@@ -1,43 +1,35 @@
-<!--miniprogram/pages/index/index.wxml-->
 <view class="container">
-  <!-- 头部 -->
-  <view class="header">
-    <text class="title">川麻记账</text>
-    <view class="history-btn" bindtap="goHistory">
-      历史对局
+  <view class="header-section">
+    <text class="app-title">川麻记账</text>
+    <text class="app-subtitle">语音记账，轻松对局</text>
+  </view>
+
+  <view class="card">
+    <view class="form-group">
+      <text class="form-label">你的昵称</text>
+      <input class="form-input" placeholder="输入昵称" maxlength="10"
+             value="{{nickname}}" bindinput="onNicknameInput" />
     </view>
+    <button class="btn btn-primary" bindtap="createRoom"
+            disabled="{{!nickname}}">创建房间</button>
   </view>
 
-  <!-- 玩家列表 -->
-  <view class="players">
-    <view class="player {{item.score > 0 ? 'winner' : item.score < 0 ? 'loser' : ''}}" 
-          wx:for="{{players}}" wx:key="name">
-      <view class="player-info">
-        <image class="avatar" src="{{item.avatar || '/images/default-avatar.png'}}"></image>
-        <text class="name">{{item.name}}</text>
-      </view>
-      <text class="score {{item.score > 0 ? 'positive' : item.score < 0 ? 'negative' : ''}}">
-        {{item.score > 0 ? '+' : ''}}{{item.score}}番
-      </text>
+  <view class="card">
+    <view class="divider-row">
+      <view class="divider-line"></view>
+      <text class="divider-text">或者</text>
+      <view class="divider-line"></view>
     </view>
-  </view>
-
-  <!-- 局数统计 -->
-  <view class="round-info">
-    <text>已打 {{roundCount}} 局</text>
-  </view>
-
-  <!-- 语音按钮 -->
-  <view class="voice-section">
-    <view class="voice-btn {{recording ? 'recording' : ''}}" 
-          bindtouchstart="startRecord" 
-          bindtouchend="stopRecord">
-      🎤 {{recording ? '松开结束' : '按住说话'}}
+    <view class="form-group">
+      <text class="form-label">房间号</text>
+      <input class="form-input" placeholder="输入房间号" maxlength="36"
+             value="{{joinRoomId}}" bindinput="onRoomIdInput" />
     </view>
+    <button class="btn btn-secondary" bindtap="joinRoom"
+            disabled="{{!joinRoomId}}">加入房间</button>
   </view>
 
-  <!-- 结算按钮 -->
-  <view class="settle-section">
-    <button class="settle-btn" bindtap="goSettle">结束本局，去结算</button>
+  <view class="footer-link" bindtap="goTest">
+    <text class="footer-text">测试页面</text>
   </view>
 </view>

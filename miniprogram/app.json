@@ -1,7 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/confirm/confirm",
+    "pages/room/room",
+    "pages/join/join",
+    "pages/game/game",
     "pages/settle/settle",
     "pages/history/history",
     "pages/test/test"
@@ -12,7 +14,6 @@
     "navigationBarTitleText": "川麻记账",
     "navigationBarTextStyle": "white"
   },
-  "cloud": true,
   "style": "v2",
   "sitemapLocation": "sitemap.json",
   "permission": {

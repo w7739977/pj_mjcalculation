@@ -1,0 +1,6 @@
+<view class="nav-bar">
+  <text class="nav-title">{{title}}</text>
+  <view class="nav-actions">
+    <slot name="actions"></slot>
+  </view>
+</view>

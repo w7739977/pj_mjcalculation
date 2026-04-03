@@ -1,47 +1,54 @@
-<!--miniprogram/pages/test/test.wxml-->
-<view class="test-container">
-  <view class="test-header">
-    <text class="title">本地测试模式</text>
-    <text class="subtitle">无需云开发环境</text>
+<view class="container">
+  <!-- Header -->
+  <view class="header">
+    <text class="title">测试页面</text>
   </view>
 
-  <!-- 测试状态 -->
-  <view class="test-status">
-    <view class="status-item">
-      <text class="label">测试模式:</text>
-      <text class="value">{{testMode ? '已启用' : '未启用'}}</text>
+  <view class="content">
+    <!-- Mock Voice -->
+    <view class="card">
+      <text class="card-title">模拟语音输入</text>
+      <textarea class="textarea" value="{{mockVoiceText}}" bindinput="onVoiceInput"
+                maxlength="200" auto-height />
+      <view class="preset-row">
+        <view wx:for="{{presets}}" wx:key="*this" class="preset-btn"
+              bindtap="setPreset" data-text="{{item}}">
+          <text class="preset-text">{{item}}</text>
+        </view>
+      </view>
     </view>
-    <view class="status-item">
-      <text class="label">云环境:</text>
-      <text class="value">{{cloudEnabled ? '已连接' : '未连接'}}</text>
+
+    <!-- Mock AI -->
+    <view class="card">
+      <text class="card-title">模拟AI解析结果</text>
+      <textarea class="textarea mono" value="{{mockAIJson}}" bindinput="onAIInput"
+                maxlength="2000" auto-height />
     </view>
-  </view>
 
-  <!-- 模拟数据设置 -->
-  <view class="mock-settings">
-    <text class="section-title">模拟语音识别结果</text>
-    <input class="mock-input" 
-           placeholder="输入模拟语音文字" 
-           value="{{mockVoiceText}}"
-           bindinput="setMockVoice" />
-    
-    <text class="section-title">模拟AI解析结果</text>
-    <textarea class="mock-textarea" 
-              placeholder="JSON格式的AI解析结果"
-              value="{{mockAIJson}}"
-              bindinput="setMockAI" />
-  </view>
+    <!-- Test Buttons -->
+    <view class="btn-group">
+      <button class="btn btn-secondary" bindtap="testVoice">测试语音识别（模拟）</button>
+      <button class="btn btn-secondary" bindtap="testAI">测试AI解析（模拟）</button>
+      <button class="btn btn-primary" bindtap="testFull">完整流程测试</button>
+    </view>
 
-  <!-- 测试按钮 -->
-  <view class="test-buttons">
-    <button class="test-btn" bindtap="runVoiceTest">测试语音识别</button>
-    <button class="test-btn" bindtap="runAITest">测试AI解析</button>
-    <button class="test-btn" bindtap="runFullTest">完整流程测试</button>
-  </view>
+    <!-- Result -->
+    <view wx:if="{{testResult}}" class="card">
+      <text class="card-title">测试结果</text>
+      <text class="result-text">{{testResult}}</text>
+    </view>
 
-  <!-- 测试结果 -->
-  <view class="test-results" wx:if="{{testResult}}">
-    <text class="result-title">测试结果</text>
-    <text class="result-content">{{testResult}}</text>
+    <!-- API Test -->
+    <view class="card">
+      <text class="card-title">API连接测试</text>
+      <button class="btn btn-outline" bindtap="testBackend">测试后端连接</button>
+    </view>
+
+    <!-- Quick Start -->
+    <view class="card">
+      <text class="card-title">快速开桌</text>
+      <text class="card-desc">使用默认4人（张三/李四/王五/赵六）快速开始一局</text>
+      <button class="btn btn-primary" bindtap="quickStart">快速开桌（默认4人）</button>
+    </view>
   </view>
 </view>

@@ -1,0 +1,72 @@
+<view class="container">
+  <!-- Header -->
+  <nav-bar title="川麻记账">
+    <view slot="actions" class="nav-actions">
+      <view wx:if="{{isTestMode}}" class="nav-btn" bindtap="goBack">返回测试</view>
+      <view class="nav-btn" bindtap="goHistory">历史</view>
+    </view>
+  </nav-bar>
+
+  <!-- Player Cards -->
+  <view class="players-card">
+    <player-card wx:for="{{players}}" wx:key="name"
+                 player="{{item}}" myName="{{app.myName}}"
+                 bind:pay="onPay" />
+  </view>
+
+  <!-- Round Count -->
+  <view class="round-info">
+    <text class="round-text">已打 {{roundCount}} 局</text>
+  </view>
+
+  <!-- Voice Button -->
+  <view class="voice-section">
+    <view class="voice-btn {{listening ? 'voice-btn-active' : ''}}"
+          bindtouchstart="startVoice" bindtouchend="stopVoice"
+          bindtouchcancel="stopVoice">
+      <text class="voice-btn-text">{{listening ? '松开结束' : '按住说话'}}</text>
+    </view>
+  </view>
+
+  <!-- Settle Button -->
+  <view class="settle-section">
+    <button class="btn btn-secondary" bindtap="goSettle">结束本局，去结算</button>
+  </view>
+
+  <!-- Confirm Modal -->
+  <confirm-modal visible="{{pendingResult !== null}}" result="{{pendingResult}}"
+                 bind:confirm="onConfirmResult" bind:cancel="onCancelResult" />
+
+  <!-- Manual Pay Dialog -->
+  <view wx:if="{{showPayDialog}}" class="modal-mask" bindtap="cancelPay">
+    <view class="modal-content" catchtap="">
+      <text class="pay-title">{{payTarget}} - 输入付款番数</text>
+      <text class="pay-sub">正数表示付给对方</text>
+      <input class="pay-input" type="number" placeholder="输入番数" min="1"
+             value="{{payAmount}}" bindinput="onPayAmountInput"
+             bindconfirm="confirmPay" focus="{{showPayDialog}}" />
+      <view class="modal-actions">
+        <button class="modal-btn-cancel" bindtap="cancelPay">取消</button>
+        <button class="modal-btn-confirm" bindtap="confirmPay"
+                disabled="{{!payAmount || payAmount <= 0}}">确认</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- Identity Picker -->
+  <view wx:if="{{showIdentityPicker}}" class="modal-mask">
+    <view class="modal-content">
+      <text class="pay-title">你是谁？</text>
+      <text class="pay-sub">选择你在本局中的身份</text>
+      <view class="identity-list">
+        <view wx:for="{{players}}" wx:key="name" class="identity-item"
+              bindtap="pickIdentity" data-name="{{item.name}}">
+          <view class="avatar-small">
+            <text class="avatar-text">{{item.name[0]}}</text>
+          </view>
+          <text class="identity-name">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

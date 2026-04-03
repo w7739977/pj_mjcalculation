@@ -1,0 +1,151 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1AAD19 0%, #f5f5f5 30%);
+  padding-bottom: 40rpx;
+}
+
+.card {
+  background: white;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  margin: 30rpx;
+  box-shadow: 0 8rpx 30rpx rgba(0, 0, 0, 0.08);
+}
+
+.room-id-section {
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.room-label {
+  font-size: 26rpx;
+  color: #9CA3AF;
+  display: block;
+}
+
+.room-id {
+  font-size: 64rpx;
+  font-weight: bold;
+  color: #1AAD19;
+  letter-spacing: 12rpx;
+  display: block;
+  margin: 16rpx 0;
+}
+
+.copy-btn {
+  font-size: 26rpx;
+  color: #1AAD19;
+  padding: 8rpx 24rpx;
+  border: 2rpx solid #1AAD19;
+  border-radius: 20rpx;
+}
+
+.section-title {
+  font-weight: bold;
+  color: #374151;
+  font-size: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.player-list {
+  margin-bottom: 10rpx;
+}
+
+.player-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f3f4f6;
+}
+
+.player-item:last-child {
+  border-bottom: none;
+}
+
+.player-avatar {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+}
+
+.player-avatar.host {
+  background: #1AAD19;
+}
+
+.player-avatar.member {
+  background: #60A5FA;
+}
+
+.avatar-num {
+  color: white;
+  font-size: 26rpx;
+  font-weight: bold;
+}
+
+.player-name {
+  flex: 1;
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.tag {
+  font-size: 22rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 16rpx;
+  margin-left: 10rpx;
+}
+
+.tag-host {
+  color: #1AAD19;
+  background: #f0faf0;
+}
+
+.tag-me {
+  color: #3B82F6;
+  background: #EFF6FF;
+}
+
+.actions {
+  padding: 40rpx 30rpx;
+}
+
+.actions .btn {
+  margin-bottom: 24rpx;
+}
+
+.btn-share {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.2);
+  border: 4rpx solid white;
+  color: white;
+}
+
+.btn-outline {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  background: rgba(255, 255, 255, 0.1);
+  border: 4rpx solid rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.waiting-text {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 28rpx;
+  display: block;
+  margin-bottom: 30rpx;
+}

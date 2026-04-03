@@ -1,62 +1,61 @@
-<!--pages/history/history.wxml-->
 <view class="container">
-  <!-- 标签页 -->
-  <view class="tabs">
-    <view class="tab {{activeTab === 'sessions' ? 'active' : ''}}" 
-          bindtap="switchTab" data-tab="sessions">
-      历史对局
+  <nav-bar title="历史记录">
+    <view slot="actions">
+      <view class="nav-btn" bindtap="goBack">返回</view>
     </view>
-    <view class="tab {{activeTab === 'debts' ? 'active' : ''}}" 
+  </nav-bar>
+
+  <!-- Tabs -->
+  <view class="tabs">
+    <view class="tab {{activeTab === 'sessions' ? 'tab-active' : ''}}"
+          bindtap="switchTab" data-tab="sessions">
+      <text>历史对局</text>
+    </view>
+    <view class="tab {{activeTab === 'debts' ? 'tab-active' : ''}}"
           bindtap="switchTab" data-tab="debts">
-      欠账记录
+      <text>欠账记录</text>
     </view>
   </view>
 
-  <!-- 历史对局 -->
-  <scroll-view wx:if="{{activeTab === 'sessions'}}" scroll-y class="scroll-area">
-    <view class="session-list">
-      <view class="session-item" wx:for="{{sessions}}" wx:key="_id" 
-            bindtap="viewSession" data-id="{{item._id}}">
-        <view class="session-header">
-          <text class="date">{{item.date}}</text>
-          <text class="rounds">{{item.rounds.length}}局</text>
-        </view>
-        <view class="session-scores">
-          <view class="score-item" wx:for="{{item.summary}}" wx:key="name">
-            <text class="name">{{item.name}}</text>
-            <text class="score {{item.score > 0 ? 'positive' : 'negative'}}">
-              {{item.score > 0 ? '+' : ''}}{{item.score}}
-            </text>
-          </view>
+  <!-- Sessions Tab -->
+  <view wx:if="{{activeTab === 'sessions'}}" class="content">
+    <view wx:for="{{sessions}}" wx:key="id" class="card">
+      <view class="session-header">
+        <text class="session-date">{{item.dateFormatted}}</text>
+        <text class="session-rounds">{{item.round_count || 0}}局</text>
+      </view>
+      <view class="score-tags">
+        <view wx:for="{{item.total_scores}}" wx:for-index="name" wx:for-item="score"
+              wx:key="name" class="score-tag">
+          <text class="tag-name">{{name}}</text>
+          <text class="tag-score {{score > 0 ? 'score-positive' : score < 0 ? 'score-negative' : 'score-zero'}}">
+            {{score > 0 ? '+' : ''}}{{score}}
+          </text>
         </view>
       </view>
     </view>
-    
     <view wx:if="{{sessions.length === 0}}" class="empty">
-      <text>暂无对局记录</text>
+      <text class="empty-text">暂无对局记录</text>
     </view>
-  </scroll-view>
+  </view>
 
-  <!-- 欠账记录 -->
-  <scroll-view wx:if="{{activeTab === 'debts'}}" scroll-y class="scroll-area">
-    <view class="debt-list">
-      <view class="debt-group" wx:for="{{debtGroups}}" wx:key="key">
-        <view class="group-header">
-          <text class="from-name">{{item.from}}</text>
-          <text>欠</text>
-          <text class="to-name">{{item.to}}</text>
-          <text class="total">共 ¥{{item.total}}</text>
+  <!-- Debts Tab -->
+  <view wx:if="{{activeTab === 'debts'}}" class="content">
+    <view wx:for="{{debtGroups}}" wx:key="key" class="card">
+      <view class="debt-header">
+        <view class="debt-names">
+          <text class="debt-name">{{item.from}}</text>
+          <text class="debt-label">欠</text>
+          <text class="debt-name">{{item.to}}</text>
+          <text class="debt-total">共 ¥{{item.total}}</text>
         </view>
-        <view class="group-actions">
-          <button class="btn-mark-settled" bindtap="markSettled" data-key="{{item.key}}">
-            标记已结清
-          </button>
+        <view class="settle-btn" bindtap="settleDebt" data-group="{{item}}">
+          <text class="settle-btn-text">标记已结清</text>
         </view>
       </view>
     </view>
-    
     <view wx:if="{{debtGroups.length === 0}}" class="empty">
-      <text>暂无欠账记录</text>
+      <text class="empty-text">暂无欠账记录</text>
     </view>
-  </scroll-view>
+  </view>
 </view>

@@ -11,9 +11,7 @@
           "action": "allow",
           "options": {
             "hostname": [
-              "api.xfyun.cn",
-              "api.anthropic.com",
-              "tcb-api.tencentcloudapi.com"
+              "your-server.com"
             ]
           }
         }

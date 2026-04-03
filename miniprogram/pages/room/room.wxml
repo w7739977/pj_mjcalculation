@@ -1,0 +1,39 @@
+<view class="container">
+  <view class="card">
+    <view class="room-id-section">
+      <text class="room-label">房间号</text>
+      <text class="room-id">{{roomId}}</text>
+      <text class="copy-btn" bindtap="copyRoomId">复制</text>
+    </view>
+
+    <view class="section-title">成员 ({{players.length}}人)</view>
+    <view class="player-list">
+      <view class="player-item" wx:for="{{players}}" wx:key="*this">
+        <view class="player-avatar {{item === roomHost ? 'host' : 'member'}}">
+          <text class="avatar-num">{{index + 1}}</text>
+        </view>
+        <text class="player-name">{{item}}</text>
+        <text wx:if="{{item === roomHost}}" class="tag tag-host">房主</text>
+        <text wx:if="{{item === myName}}" class="tag tag-me">我</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="actions">
+    <block wx:if="{{isHost && roomStatus === 'waiting'}}">
+      <button class="btn btn-share" open-type="share">邀请成员</button>
+      <button class="btn btn-primary" bindtap="startGame"
+              disabled="{{players.length < 2}}">
+        开始对局 ({{players.length}}人)
+      </button>
+      <button class="btn btn-danger" bindtap="disbandRoom">解散房间</button>
+    </block>
+
+    <block wx:if="{{!isHost && roomStatus === 'waiting'}}">
+      <text class="waiting-text">等待房主开始对局...</text>
+      <button class="btn btn-outline" bindtap="leaveRoom">离开房间</button>
+    </block>
+
+    <text wx:if="{{roomStatus === 'playing'}}" class="waiting-text">对局进行中，跳转中...</text>
+  </view>
+</view>

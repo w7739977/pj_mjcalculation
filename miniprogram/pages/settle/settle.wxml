@@ -1,42 +1,46 @@
-<!--pages/settle/settle.wxml-->
 <view class="container">
-  <!-- 头部 -->
-  <view class="header">
-    <text class="title">对局结算</text>
-    <text class="sub-title">底分：1番 = 1元</text>
+  <nav-bar title="对局结算">
+    <view slot="actions">
+      <view class="nav-btn" bindtap="goBack">返回</view>
+    </view>
+  </nav-bar>
+
+  <view class="base-info">
+    <text class="base-text">底分：1番 = 1元</text>
   </view>
 
-  <!-- 玩家排名 -->
-  <view class="players">
-    <view class="player {{item.score > 0 ? 'winner' : 'loser'}}" 
-          wx:for="{{sortedPlayers}}" wx:key="name">
-      <view class="rank">{{index + 1}}</view>
-      <text class="name">{{item.name}}</text>
-      <view class="scores">
-        <text class="score">{{item.score > 0 ? '+' : ''}}{{item.score}}番</text>
-        <text class="money">¥{{item.score > 0 ? '+' : ''}}{{item.score}}</text>
+  <!-- Ranking -->
+  <view class="card">
+    <view wx:for="{{sortedPlayers}}" wx:key="name"
+          class="rank-row {{item.score > 0 ? 'rank-green' : item.score < 0 ? 'rank-red' : ''}}">
+      <view class="rank-num {{index === 0 && item.score > 0 ? 'rank-gold' : 'rank-gray'}}">
+        <text>{{index + 1}}</text>
       </view>
-      <text class="trophy" wx:if="{{index === 0 && item.score > 0}}">🏆</text>
+      <text class="rank-name">{{item.name}}</text>
+      <view class="rank-score-area">
+        <text class="rank-score {{item.score > 0 ? 'score-positive' : item.score < 0 ? 'score-negative' : 'score-zero'}}">
+          {{item.score > 0 ? '+' : ''}}{{item.score}}番
+        </text>
+        <text class="rank-money">¥{{item.score}}</text>
+      </view>
     </view>
   </view>
 
-  <!-- 欠账清单 -->
-  <view class="debts-section" wx:if="{{debts.length > 0}}">
+  <!-- Debts -->
+  <view wx:if="{{debts.length > 0}}" class="card">
     <text class="section-title">欠账清单</text>
-    <view class="debts">
-      <view class="debt-item" wx:for="{{debts}}" wx:key="*this">
-        <text class="debt-from">{{item.from}}</text>
-        <text class="arrow">→</text>
-        <text class="debt-to">{{item.to}}</text>
-        <text class="debt-amount">¥{{item.amount}}</text>
-        <button class="btn-settle" size="mini" bindtap="settleDebt" data-debt="{{item}}">结清</button>
-      </view>
+    <view wx:for="{{debts}}" wx:key="index" class="debt-row">
+      <text class="debt-name">{{item.from}}</text>
+      <text class="debt-arrow">→</text>
+      <text class="debt-name">{{item.to}}</text>
+      <text class="debt-amount">¥{{item.amount}}</text>
     </view>
   </view>
 
-  <!-- 操作按钮 -->
+  <!-- Actions -->
   <view class="actions">
-    <button class="btn-primary" bindtap="saveRecord">保存记录</button>
-    <button class="btn-secondary" bindtap="newGame">新开一局</button>
+    <button class="btn btn-primary" bindtap="saveRecord">保存记录</button>
+    <button wx:if="{{roomId}}" class="btn btn-blue" bindtap="backToRoom">返回房间开新一局</button>
+    <button class="btn btn-secondary" bindtap="newGame">新开一局</button>
   </view>
 </view>
