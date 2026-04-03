@@ -4,11 +4,12 @@
 
 ## 功能特性
 
-- 🎤 **语音输入**：说话自动识别，无需手动输入
-- 🤖 **AI解析**：智能理解川麻规则，自动计算番数
-- 📊 **实时记分**：对局中实时显示各玩家分数
-- 💰 **结算追踪**：自动计算欠账，支持结清标记
-- 📜 **历史记录**：查看历史对局，累计欠账统计
+- 语音输入：说话自动识别，无需手动输入
+- AI解析：智能理解川麻规则，自动计算番数
+- 实时记分：对局中实时显示各玩家分数
+- 结算追踪：自动计算欠账，支持结清标记
+- 历史记录：查看历史对局，累计欠账统计
+- WebSocket 实时同步：房间/对局状态推送，自动降级到轮询
 
 ---
 
@@ -16,185 +17,94 @@
 
 ```
 pj_mjcalculation/
-│
 ├── miniprogram/                    # 小程序前端
 │   ├── pages/
-│   │   ├── index/                 # 首页（记分页面）✅
-│   │   │   ├── index.js           # 页面逻辑
-│   │   │   ├── index.wxml         # 页面结构
-│   │   │   ├── index.wxss         # 页面样式
-│   │   │   └── index.json         # 页面配置
-│   │   │
-│   │   ├── confirm/               # 确认弹窗页 ✅
-│   │   ├── settle/                # 结算页 ✅
-│   │   ├── history/               # 历史记录页 ✅
-│   │   └── test/                  # 本地测试页 ✅
+│   │   ├── index/                 # 首页
+│   │   ├── room/                  # 房间大厅
+│   │   ├── join/                  # 加入房间
+│   │   ├── game/                  # 游戏页（核心）
+│   │   ├── settle/                # 结算页
+│   │   ├── history/               # 历史记录页
+│   │   └── test/                  # 自动测试页
 │   │
-│   ├── test/                      # 测试工具
-│   │   ├── test_data.json         # 测试数据
-│   │   └── test_utils.js          # 测试工具类
+│   ├── components/
+│   │   ├── nav-bar/               # 导航栏
+│   │   ├── player-card/           # 玩家卡片
+│   │   └── confirm-modal/         # AI结果确认弹窗
 │   │
-│   ├── app.js                     # 小程序入口 ✅
-│   ├── app.json                   # 全局配置 ✅
-│   ├── app.wxss                   # 全局样式 ✅
-│   └── project.config.json        # 项目配置 ✅
+│   ├── utils/
+│   │   ├── api.js                 # HTTP客户端（wx.request）
+│   │   ├── storage.js             # 本地存储封装
+│   │   ├── recorder.js            # 录音器封装
+│   │   ├── websocket.js           # WebSocket客户端（优先WS，降级轮询）
+│   │   ├── poll.js                # 轮询工具（WS降级方案）
+│   │   ├── format.js              # 格式化工具
+│   │   └── constants.js           # 常量定义
+│   │
+│   ├── app.js                     # 小程序入口
+│   ├── app.json                   # 全局配置
+│   ├── app.wxss                   # 全局样式
+│   └── project.config.json        # 项目配置
 │
-├── cloudfunctions/                 # 云函数
-│   ├── voiceToText/               # 语音转文字 ⚠️
-│   └── aiParser/                  # AI解析 ⚠️
-│
-├── docs/                           # 项目文档
-│   ├── ai_prompt.md               # AI解析Prompt ✅
-│   ├── data_structure.md          # 数据结构设计 ✅
-│   └── 测试指南.md                # 详细测试说明 ✅
-│
+├── cross-reference.md             # Web/小程序功能交叉参考
+├── CLAUDE.md                      # 开发指南
 └── README.md
 ```
 
-**状态说明：**
-- ✅ 已完成
-- ⚠️ 待完善
-- ❌ 未开始
+---
+
+## 技术栈
+
+| 类别 | 技术 |
+|------|------|
+| 前端框架 | 微信小程序原生 |
+| 后端服务 | Express/SQLite（与 Web 版共享） |
+| 实时同步 | WebSocket（ws 库），降级到轮询 |
+| 语音识别 | 腾讯云 ASR |
+| AI解析 | GLM-4-flash |
+| 通信方式 | HTTP API + WebSocket |
 
 ---
 
-## 🧪 快速测试（本地模式）
+## 配置
 
-### 步骤1：下载工具
-
-https://developers.weixin.qq.com/miniprogram/devtools/download.html
-
-### 步骤2：导入项目
-
-1. 打开微信开发者工具
-2. 选择"导入项目"
-3. 目录选择: `pj_mjcalculation/miniprogram`
-4. AppID填写: `test123` (测试号)
-
-### 步骤3：启用测试页
-
-修改 `app.json`:
-```json
-"pages": [
-  "pages/test/test",  // 添加这行
-  "pages/index/index",
-  "pages/confirm/confirm",
-  "pages/settle/settle",
-  "pages/history/history"
-]
-```
-
-### 步骤4：开始测试
-
-- ✅ 测试语音识别（模拟）
-- ✅ 测试AI解析（模拟）
-- ✅ 测试完整流程
-
-**优点：**
-- 无需云开发环境
-- 无需API密钥
-- 可快速验证UI和逻辑
+1. **服务器地址** — `app.js` → `globalData.baseUrl` → 改为你的服务器地址
+2. **AppID** — `project.config.json` → `appid` → 填入小程序 AppID
+3. **域名校验** — 开发阶段 `urlCheck: false`，上线前改为 `true` 并配置白名单
 
 ---
 
-## 📋 开发进度
+## 开发进度
 
-### ✅ 已完成
+### 已完成
 
-- [x] **项目初始化** - Git仓库创建
-- [x] **基础页面结构** - 4个核心页面
-- [x] **数据结构设计** - 数据库schema
-- [x] **AI解析Prompt** - 语音理解逻辑
-- [x] **全局样式** - app.wxss
-- [x] **项目配置** - project.config.json
-- [x] **测试功能** - 本地测试页面
+- [x] 项目初始化，原生微信小程序框架
+- [x] 重写为 HTTP API 通信，去除 wx.cloud
+- [x] 7 个页面 + 3 个组件 + 7 个工具模块
+- [x] 完整游戏流程（创建房间→加入→开始→语音记账→结算）
+- [x] 语音录音 → 上传 → ASR识别 → AI解析 → 确认 → 保存
+- [x] WebSocket 实时同步（房间状态、对局分数推送）
+- [x] WS 自动降级到轮询（指数退避重连）
+- [x] 自动测试页（11项测试：API全链路 + WebSocket推送）
+- [x] 快速开桌（测试模式，4人直接开始）
+- [x] 会话恢复（localStorage 持久化）
+- [x] 手动付款功能
+- [x] 身份选择（测试模式弹窗）
 
-### ⚠️ 进行中
+### 进行中
 
-- [ ] **语音识别集成** - 接入讯飞API
-- [ ] **AI解析集成** - 接入Claude API
+- [ ] 微信开发者工具真机调试测试
+- [ ] test 页面后续移除
 
-### 📝 待开发
+### 待开发
 
-- [ ] **结算功能** - 欠账计算逻辑
-- [ ] **历史记录** - 对局查询
-- [ ] **欠账追踪** - 结清标记
-- [ ] **UI优化** - 交互体验提升
-- [ ] **部署** - 云函数部署
-
----
-
-## 🔧 技术栈
-
-| 类别 | 技术 | 状态 |
-|------|------|------|
-| **前端框架** | 微信小程序原生 | ✅ |
-| **UI组件** | 自定义组件 | ✅ |
-| **后端服务** | 微信云开发 | ✅ |
-| **语音识别** | 讯飞语音API | ⚠️ |
-| **AI解析** | Claude API | ⚠️ |
-| **数据库** | 云开发数据库 | ✅ |
+- [ ] UI优化
+- [ ] 上线部署（域名配置、HTTPS证书、域名校验白名单）
 
 ---
 
-## 📖 详细文档
+## 关联项目
 
-- [测试指南](docs/测试指南.md) - 完整测试说明
-- [AI Prompt](docs/ai_prompt.md) - AI解析逻辑
-- [数据结构](docs/data_structure.md) - 数据库设计
-
----
-
-## 📝 Git提交记录
-
-| 提交ID | 类型 | 说明 |
-|--------|------|------|
-| `ea3b93d` | 🎉 init | Initial commit: 项目初始化 |
-| `8edcf6f` | ✨ feat | 添加川麻记账小程序基础结构和文档 |
-| `13f19e6` | 🔨 refactor | 调整为微信小程序标准目录结构 |
-| `0428a35` | 📝 docs | 更新README，添加详细项目架构和开发进度 |
-| `d69ec3a` | 🧪 test | 添加本地测试功能 |
-
----
-
-## 🚀 开发路线图
-
-### 第1周：基础功能 ✅
-- [x] 项目搭建
-- [x] 页面结构
-- [x] 数据设计
-- [x] 测试功能
-
-### 第2周：核心功能 🔄
-- [ ] 语音识别
-- [ ] AI解析
-- [ ] 记分流程
-
-### 第3周：完善功能 📋
-- [ ] 结算逻辑
-- [ ] 历史记录
-- [ ] 欠账追踪
-
----
-
-## 📱 预览
-
-**本地测试：** 无需任何配置，直接可用
-
-**云环境测试：** 需要配置：
-1. 微信小程序AppID
-2. 云开发环境
-3. 讯飞API密钥（可选）
-4. Claude API密钥（可选）
-
----
-
-## 📄 License
-
-MIT
-
----
-
-**开发者：** w7739977  
-**邮箱：** weiye36@gmail.com  
-**GitHub：** https://github.com/w7739977/pj_mjcalculation
+- Web 版：~/pj_mjcalculation_web/
+- 后端：~/pj_mjcalculation_web/server/
+- 交叉参考：cross-reference.md

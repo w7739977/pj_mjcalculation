@@ -1,6 +1,6 @@
 var api = require('../../utils/api')
 var recorder = require('../../utils/recorder')
-var poll = require('../../utils/poll')
+var ws = require('../../utils/websocket')
 var storage = require('../../utils/storage')
 var app = getApp()
 
@@ -19,7 +19,7 @@ Page({
     showIdentityPicker: false
   },
 
-  _pollTimer: null,
+  _subHandle: null,
 
   onLoad: function (options) {
     if (options.test === '1') {
@@ -144,10 +144,10 @@ Page({
   },
 
   startPolling: function () {
-    if (this._pollTimer) return
+    if (this._subHandle) return
     var that = this
     var g = app.globalData
-    this._pollTimer = poll.startPolling(g.sessionId, 3000, function (res) {
+    this._subHandle = ws.startPolling(g.sessionId, 3000, function (res) {
       if (!res) return
       var s = res.session
       var newRounds = s.rounds || []
@@ -165,9 +165,9 @@ Page({
   },
 
   stopPolling: function () {
-    if (this._pollTimer) {
-      poll.stopPolling(this._pollTimer)
-      this._pollTimer = null
+    if (this._subHandle) {
+      ws.stopPolling(this._subHandle)
+      this._subHandle = null
     }
   },
 

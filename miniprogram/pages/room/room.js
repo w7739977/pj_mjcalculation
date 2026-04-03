@@ -1,6 +1,6 @@
 var api = require('../../utils/api')
 var storage = require('../../utils/storage')
-var poll = require('../../utils/poll')
+var ws = require('../../utils/websocket')
 var app = getApp()
 
 Page({
@@ -13,7 +13,7 @@ Page({
     isHost: false
   },
 
-  _pollTimer: null,
+  _subHandle: null,
 
   onLoad: function (options) {
     this.setData({ roomId: options.id || '' })
@@ -25,7 +25,7 @@ Page({
   onShow: function () {
     this.refreshRoom()
     var that = this
-    this._pollTimer = poll.startRoomPolling(this.data.roomId, 2000, function (res) {
+    this._subHandle = ws.startRoomPolling(this.data.roomId, 2000, function (res) {
       if (!res) {
         wx.redirectTo({ url: '/pages/index/index' })
         return
@@ -35,11 +35,11 @@ Page({
   },
 
   onHide: function () {
-    poll.stopRoomPolling(this._pollTimer)
+    ws.stopRoomPolling(this._subHandle)
   },
 
   onUnload: function () {
-    poll.stopRoomPolling(this._pollTimer)
+    ws.stopRoomPolling(this._subHandle)
   },
 
   refreshRoom: function () {
@@ -62,7 +62,7 @@ Page({
     })
 
     if (room.status === 'playing' && room.session_id) {
-      poll.stopRoomPolling(this._pollTimer)
+      ws.stopRoomPolling(this._subHandle)
       app.globalData.sessionId = room.session_id
       app.globalData.roomId = this.data.roomId
       app.globalData.myName = this.data.myName

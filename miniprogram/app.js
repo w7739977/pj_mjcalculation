@@ -16,7 +16,7 @@ App({
 
   globalData: {
     // 服务器地址，开发时改为你的服务器 IP:端口
-    baseUrl: 'https://your-server.com:3001/api',
+    baseUrl: 'https://119.91.53.223:3002/api',
 
     // 会话状态（替代 Pinia store）
     sessionId: null,

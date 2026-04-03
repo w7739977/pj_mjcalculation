@@ -44,6 +44,23 @@
       <button class="btn btn-outline" bindtap="testBackend">测试后端连接</button>
     </view>
 
+    <!-- WebSocket Test -->
+    <view class="card">
+      <text class="card-title">WebSocket推送测试</text>
+      <text class="card-desc">测试WS连接、订阅、房间推送、对局推送、降级轮询</text>
+      <button class="btn btn-outline" bindtap="testWS">WS连接测试</button>
+      <button class="btn btn-outline" bindtap="testWSPush">WS推送测试</button>
+    </view>
+
+    <!-- Run All -->
+    <view class="card">
+      <text class="card-title">一键测试</text>
+      <button class="btn btn-primary" bindtap="testAll" disabled="{{testRunning}}">
+        {{testRunning ? '测试中...' : '运行全部测试'}}
+      </button>
+      <text wx:if="{{allTestResult}}" class="result-text">{{allTestResult}}</text>
+    </view>
+
     <!-- Quick Start -->
     <view class="card">
       <text class="card-title">快速开桌</text>

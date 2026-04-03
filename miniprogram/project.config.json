@@ -5,18 +5,7 @@
     "include": []
   },
   "setting": {
-    "urlCheck": {
-      "rules": [
-        {
-          "action": "allow",
-          "options": {
-            "hostname": [
-              "your-server.com"
-            ]
-          }
-        }
-      ]
-    },
+    "urlCheck": false,
     "es6": true,
     "enhance": true,
     "postcss": true,
@@ -53,7 +42,7 @@
     "showES6CompileOption": false,
     "useCompilerPlugins": false
   },
-  "appid": "请替换为你的小程序AppID",
+  "appid": "wxbafe523acebebd37",
   "projectname": "pj_mjcalculation",
   "debugOptions": {
     "hidedInDevtools": []
